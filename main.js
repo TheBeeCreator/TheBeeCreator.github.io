@@ -26,5 +26,5 @@ function buyWorker(){
 };
 
 window.setInterval(function(){
-	generateHoney(cursors);	
+	generateHoney(beeWorker);	
 }, 1000);
