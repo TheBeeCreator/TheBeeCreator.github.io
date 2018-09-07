@@ -1,30 +1,98 @@
-var honey = 0;
+//Var resources
+var larva = 50;
+var honey = 1000000000;
+var prestige = 0;
 
-function generateHoney(number){
-    honey = honey + number;
-    document.getElementById("honey").innerHTML = honey;
+//Var units
+var beeWorker = 10;
+var beeCaretaker = 1;
+
+//Var costs
+var beeWorkerCost = 0;
+var beeCaretakerCost = 0;
+
+//save/load functions
+function loadSaveGame(){
+	var savegame = JSON.parse(localStorage.getItem("save"));
+	
+	if (typeof savegame.larva !== "undefined") larva = savegame.larva;
+	if (typeof savegame.honey !== "undefined") honey = savegame.honey;
+	if (typeof savegame.beeWorker !== "undefined") beeWorker = savegame.beeWorker;
+	if (typeof savegame.beeCaretaker !== "undefined") beeCaretaker = savegame.beeCaretaker;
+	if (typeof savegame.prestige !== "undefined") prestige = savegame.prestige;
+	
+	if (typeof savegame.beeWorker !== "undefined") beeWorker = savegame.beeWorker;
+	if (typeof savegame.beeWorker !== "undefined") document.getElementById('beeWorker').innerHTML = savegame.beeWorker;
+	
+	if (typeof savegame.beeWorkerCost !== "undefined") beeWorkerCost = savegame.beeWorkerCost;
+	if (typeof savegame.beeWorkerCost !== "undefined") document.getElementById('beeWorkerCost').innerHTML = savegame.beeWorkerCost;
+	
+	if (typeof savegame.beeCaretaker !== "undefined") beeCaretaker = savegame.beeCaretaker;
+	if (typeof savegame.beeCaretaker !== "undefined") document.getElementById('beeCaretaker').innerHTML = savegame.beeCaretaker;
+	
+	if (typeof savegame.beeCaretakerCost !== "undefined") beeCaretakerCost = savegame.beeCaretakerCost;
+	if (typeof savegame.beeCaretakerCost !== "undefined") document.getElementById('beeCaretakerCost').innerHTML = savegame.beeCaretakerCost;
+}
+
+function saveGame(){
+	var save = {
+		larva: larva,
+		honey: honey,
+		beeWorker: beeWorker,
+		beeWorkerCost: beeWorkerCost,
+		beeCaretaker: beeCaretaker,
+		beeCaretakerCost: beeCaretakerCost,
+		prestige: prestige
+	}
+	
+	localStorage.setItem("save",JSON.stringify(save));
+}
+
+function resetSave(){
+	localStorage.removeItem("save");
+}
+
+//Primary functions
+function handleResources(beeWorker, beeCaretaker){
+	//Increment resources
+    honey = honey + beeWorker;
+	larva = Math.round((larva + (beeCaretaker * 1.1)));
+	
+	//Update all your resources
+    document.getElementById("larva").innerHTML = larva;
+	document.getElementById("honey").innerHTML = honey;
 };
 
-var beeWorker = 0;
-var beePlaceholder1 = 0;
-var beePlaceholder2 = 0;
-var beePlaceholder3 = 0;
-var beePlaceholder4 = 0;
-var beePlaceholder5 = 0;
-var beePlaceholder6 = 0;
-
 function buyWorker(){
-    var beeWorkerCost = Math.floor(10 * Math.pow(1.1,beeWorker));   //works out the cost of this bee
-    if(honey >= beeWorkerCost){                                     //checks that the player can afford upgrade
-        beeWorker = beeWorker + 1;                                  //increases number of bee workers
-    	  honey = honey - beeWorkerCost;                              //removes the honey spent
+    beeWorkerCost = Math.floor(10 * Math.pow(1.1,beeWorker));   //works out the cost of this bee
+    if(honey >= beeWorkerCost & larva >= 0){                                     //checks that the player can afford upgrade
+		beeWorker = beeWorker + 1;                                  //increases number of bee workers
+    	larva = larva - 1;
+		honey = honey - beeWorkerCost;                              //removes the honey spent
         document.getElementById('beeWorker').innerHTML = beeWorker; //updates the number of bees for the user
         document.getElementById('honey').innerHTML = honey;         //updates the number of honey for the user
     };
-    var nextCost = Math.floor(10 * Math.pow(1.1,beeWorker));       //works out the cost of the next cursor
+    var nextCost = Math.floor(10 * Math.pow(1.1,beeWorker));       	//works out the cost of the next cursor
     document.getElementById('beeWorkerCost').innerHTML = nextCost;  //updates the cursor cost for the user
+	beeWorkerCost = nextCost;
 };
 
+function buyCaretaker() {
+	beeCaretakerCost = Math.floor(100 * Math.pow(1.1,beeCaretaker));
+	if(honey >= beeCaretakerCost){
+		beeCaretaker = beeCaretaker + 1;
+		honey = honey - beeCaretakerCost;
+        document.getElementById('beeCaretaker').innerHTML = beeCaretaker; 
+        document.getElementById('honey').innerHTML = honey;         
+    };
+    var nextCost = Math.floor(100 * Math.pow(1.1,beeCaretaker));
+	document.getElementById('beeCaretakerCost').innerHTML = beeCaretakerCost;
+	beeCaretakerCost = nextCost;	
+};
+
+//Handle timing
 window.setInterval(function(){
-	generateHoney(beeWorker);	
+	handleResources(beeWorker, beeCaretaker);
+	saveGame();
+	//resetSave();
 }, 1000);
