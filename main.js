@@ -1,6 +1,15 @@
 //Var resources
 var larva = 10;
 var honey = 0;
+
+var coal = 0;
+var steel = 0;
+var stone = 0;
+var wood = 0;
+
+var currentPopulation = 0;
+var populationCap = 0;
+
 var prestige = 0;
 
 //Var units
@@ -53,7 +62,11 @@ function saveGame(){
 }
 
 function resetSave(){
-	localStorage.removeItem("save");
+	var confirmation;
+	if (confirm("Are you sure you wish to reset?") == true) {
+		localStorage.removeItem("save");
+		window.location.reload(false);
+	}
 }
 
 //Primary functions
