@@ -3,8 +3,10 @@
 	<head>
 		<!--<link rel="stylesheet" type="text/css" href="/css/main.css">-->
 	</head>
-	<body>
+	<body onload="loadSaveGame()">
 		<button onclick="generateHoney(1)">Generate Honey</button>
+		<br />
+		Larva: <span id="larva">0</span>
 		<br />
 		Honey: <span id="honey">0</span>
 		<br />
@@ -13,6 +15,12 @@
 		Worker Bees: <span id="beeWorker">0</span>
 		<br />
 		Worker Bee Cost: <span id="beeWorkerCost">10</span>
+		<br />
+		<button onclick="buyCaretaker()">Buy Caretaker Bee</button>
+		<br />
+		Caretaker Bees: <span id="beeCaretaker">0</span>
+		<br />
+		Caretaker Bee Cost: <span id="beeCaretakerCost">100</span>
 		
 		<script type="text/javascript" src="main.js"></script>
 	</body>
