@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!--<link rel="stylesheet" type="text/css" href="/css/main.css">-->
+		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body onload="loadSaveGame()">
 		<button onclick="generateHoney(1)">Generate Honey</button>
 		<br />
-		Larva: <span id="larva">0</span>
-		<br />
-		Honey: <span id="honey">0</span>
-		<br />
-		<button onclick="buyWorker()">Buy Worker Bee</button>
-		<br />
-		Worker Bees: <span id="beeWorker">0</span>
-		<br />
-		Worker Bee Cost: <span id="beeWorkerCost">10</span><span> H</span>
-		<br />
-		<button onclick="buyCaretaker()">Buy Caretaker Bee</button>
-		<br />
-		Caretaker Bees: <span id="beeCaretaker">0</span>
-		<br />
-		Caretaker Bee Cost: <span id="beeCaretakerCost">100</span><span> H</span>
-		<br />
+		<table id="tblResources">
+			<tr>
+				<td>Larva:</td><td><span id="larva">0</span></td>
+				<td>Honey:</td><td><span id="honey">0</span></td>
+			</tr>
+		</table>
+		<table id="tblUnits">
+			<tr>
+				<td></td>
+				<td>Unit Type</td>
+				<td>Current Number</td>
+				<td>Cost</td>
+			</tr>
+			<tr>
+				<td><button id="btnStyle" class="btnStyle" onclick="buyWorker()">Buy Worker Bee</button></td>
+				<td>Worker Bees</td>
+				<td><span id="beeWorker">0</span></td>
+				<td><span id="beeWorkerCost">10</span><span> Honey</span><span> 1 Larva</span></td>
+			</tr>
+			<tr>
+				<td><button id="btnStyle" class="btnStyle" onclick="buyCaretaker()">Buy Caretaker Bee</button></td>
+				<td>Caretaker Bees</td>
+				<td><span id="beeCaretaker">0</span></td>
+				<td><span id="beeCaretakerCost">100</span><span> Honey</span><span> 1 Larva</span></td>
+			</tr>
+		</table>
+
 		<button onclick="resetSave()">Reset Save</button>
 		
 		<script type="text/javascript" src="main.js"></script>
