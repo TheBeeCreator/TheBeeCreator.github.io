@@ -8,8 +8,8 @@ var beeWorker = 0;
 var beeCaretaker = 0;
 
 //Var costs
-var beeWorkerCost = 0;
-var beeCaretakerCost = 0;
+var beeWorkerCost = 10;
+var beeCaretakerCost = 100;
 
 //save/load functions
 function loadSaveGame(){
@@ -53,6 +53,10 @@ function resetSave(){
 }
 
 //Primary functions
+function generateHoney(number){
+    honey = honey + number;
+};
+
 function handleResources(beeWorker, beeCaretaker){
 	//Increment resources
     honey = honey + beeWorker;
@@ -93,6 +97,8 @@ function buyCaretaker() {
 //Handle timing
 window.setInterval(function(){
 	handleResources(beeWorker, beeCaretaker);
-	saveGame();
-	//resetSave();
 }, 1000);
+
+window.setInterval(function(){
+	saveGame();
+}, 30000)
