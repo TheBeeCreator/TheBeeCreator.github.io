@@ -1,11 +1,11 @@
 //Var resources
-var larva = 50;
-var honey = 1000000000;
+var larva = 10;
+var honey = 0;
 var prestige = 0;
 
 //Var units
-var beeWorker = 10;
-var beeCaretaker = 1;
+var beeWorker = 0;
+var beeCaretaker = 0;
 
 //Var costs
 var beeWorkerCost = 0;
